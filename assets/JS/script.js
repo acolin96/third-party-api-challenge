@@ -1,7 +1,37 @@
+var dateDisplayEl = $("#currentDay");
+var timeDisplayEl = $("#currentTime");
+var nowEl = dayjs().format("MMM D, YYYY");
+
+
+// dateDisplayEl.text(dayjs().format("dddd MMM D, YYYY h:m:s"))
+
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
- $(function () {
+  $(function updateTime() {
+     var now = dayjs();
+
+    // dateDisplayEl.text(now.format("dddd MMM D, YYYY h:m:s"));
+    timeDisplayEl.text(now.format("dddd MMM D, YYYY h:mm:s"));
+
+    updateTime()
+
+    setInterval(updateTime, 1000)
+
+});
+   
+
+$(".saveBtn").on("click", function() {
+    var timeBlockId = $(this).parent().attr("id");
+    var textValue = $(this).siblings("textarea").val();
+  
+    // Save the text value to local storage using the time block id as the key
+    localStorage.setItem(timeBlockId, textValue);
+  });
+  
+  
+  
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -19,5 +49,4 @@
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
-    // TODO: Add code to display the current date in the header of the page.
-   });
+    // TODO: Add code to display the current date in the header of the page.   
